@@ -1,0 +1,249 @@
+.philosophy-section {
+  position: relative;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.phil-container {
+  width: 100%;
+}
+
+.phil-title {
+  margin-bottom: var(--space-12);
+  text-align: left;
+}
+
+.phil-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+@media (min-width: 640px) {
+  .phil-grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: var(--space-12);
+    column-gap: var(--space-16);
+  }
+}
+
+/* Base Card Styles */
+.phil-card {
+  position: relative;
+  padding: var(--space-6) var(--space-4) var(--space-4) 0;
+  background: transparent;
+  cursor: pointer;
+  z-index: 1;
+}
+
+/* Accent Line Animation */
+.phil-card-accent-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 2;
+}
+
+.phil-card-accent-line::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  background: var(--accent-color);
+  transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.phil-card:hover .phil-card-accent-line::after,
+.phil-card.is-expanded .phil-card-accent-line::after {
+  width: 100%;
+}
+
+/* Subtle Glow Background */
+.phil-card-glow {
+  position: absolute;
+  top: 0;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: radial-gradient(ellipse at top left, rgba(59, 130, 246, 0.03), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 1rem;
+}
+
+.phil-card:hover .phil-card-glow,
+.phil-card.is-expanded .phil-card-glow {
+  opacity: 1;
+}
+
+/* Background SVGs */
+.phil-bg-visual {
+  position: absolute;
+  top: 20px;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  color: rgba(255, 255, 255, 0.02);
+  z-index: 0;
+  pointer-events: none;
+  transition: color 0.6s ease, transform 0.6s ease;
+}
+
+.phil-card:hover .phil-bg-visual {
+  color: rgba(173, 198, 255, 0.05);
+  transform: scale(1.02);
+}
+
+/* Content Wrapper */
+.phil-content-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+/* Typography Interactions */
+.phil-num {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: var(--space-4);
+  display: inline-block;
+  transition: color 0.4s ease, transform 0.4s ease;
+}
+
+.phil-card:hover .phil-num {
+  color: var(--accent-light);
+  transform: translateX(4px);
+}
+
+.phil-card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+  letter-spacing: -0.01em;
+  transition: color 0.4s ease, text-shadow 0.4s ease;
+}
+
+.phil-card:hover .phil-card-title,
+.phil-card.is-expanded .phil-card-title {
+  color: #ffffff;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.1);
+}
+
+.phil-card-desc {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 440px;
+  transition: color 0.4s ease;
+}
+
+.phil-card:hover .phil-card-desc,
+.phil-card.is-expanded .phil-card-desc {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Metadata */
+.phil-metadata {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-top: var(--space-4);
+  opacity: 0.5;
+  transition: opacity 0.4s ease;
+}
+
+.phil-card:hover .phil-metadata {
+  opacity: 1;
+}
+
+/* Expansion Details */
+.phil-expansion {
+  overflow: hidden;
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px dashed rgba(255, 255, 255, 0.05);
+}
+
+.phil-quote-box {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.phil-quote-icon {
+  font-size: 1.5rem;
+  color: var(--accent-color);
+  opacity: 0.6;
+}
+
+.phil-quote-text {
+  font-size: 1.125rem;
+  font-style: italic;
+  color: var(--text-primary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.phil-context-label {
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
+  display: block;
+}
+
+.phil-context-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.phil-context-list li {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Closing Statement */
+.phil-closing-statement {
+  margin-top: var(--space-16);
+  padding-top: var(--space-12);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+.phil-closing-statement p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--text-primary);
+  line-height: 1.5;
+  max-width: 800px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .phil-closing-statement p {
+    font-size: 1.25rem;
+  }
+}
