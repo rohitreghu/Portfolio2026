@@ -229,7 +229,11 @@
   flex-direction: column;
   align-items: center;
   z-index: 10;
-  transition: transform 500ms ease;
+  transition: transform 500ms ease, z-index 0s;
+}
+
+.arch-node:hover {
+  z-index: 30;
 }
 
 .node-center {
@@ -498,5 +502,24 @@
 
   .hero-ctas, .credibility-strip, .credibility-logos {
     justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .node-tooltip {
+    white-space: normal;
+    text-align: center;
+    width: max-content;
+    max-width: 150px;
+  }
+
+  .node-center .node-tooltip {
+    top: calc(100% + var(--space-2));
+    left: 50%;
+    transform: translate(-50%, 0) scale(0.95);
+  }
+
+  .node-center.group:hover .node-tooltip {
+    transform: translate(-50%, 0) scale(1);
   }
 }

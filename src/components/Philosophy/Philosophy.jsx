@@ -129,7 +129,6 @@ const Philosophy = () => {
             return (
               <motion.div 
                 key={p.id} 
-                layout
                 variants={cardVariant} 
                 className={`phil-card group ${isExpanded ? 'is-expanded' : ''}`}
                 onClick={() => handleCardClick(p.id)}
@@ -139,17 +138,17 @@ const Philosophy = () => {
                 <div className="phil-card-glow"></div>
                 <PhilosophyVisual type={p.visualType} />
 
-                <motion.div layout="position" className="phil-content-wrapper">
-                  <motion.span layout="position" className="phil-num">{p.num}</motion.span>
-                  <motion.h3 layout="position" className="phil-card-title">{p.title}</motion.h3>
+                <div className="phil-content-wrapper">
+                  <span className="phil-num">{p.num}</span>
+                  <h3 className="phil-card-title">{p.title}</h3>
                   
-                  <motion.p layout="position" className="phil-card-desc">
+                  <p className="phil-card-desc">
                     {p.description}
-                  </motion.p>
+                  </p>
                   
-                  <motion.div layout="position" className="phil-metadata">
+                  <div className="phil-metadata">
                     {p.metadata}
-                  </motion.div>
+                  </div>
 
                   <AnimatePresence>
                     {isExpanded && (
@@ -157,26 +156,28 @@ const Philosophy = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                        className="phil-expansion"
+                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ overflow: 'hidden' }}
                       >
-                        <div className="phil-quote-box">
-                          <span className="material-symbols-outlined phil-quote-icon">format_quote</span>
-                          <p className="phil-quote-text">{p.quote}</p>
-                        </div>
-                        
-                        <div className="phil-context-box">
-                          <span className="phil-context-label">Applied Context</span>
-                          <ul className="phil-context-list">
-                            {p.context.map((ctx, idx) => (
-                              <li key={idx}>{ctx}</li>
-                            ))}
-                          </ul>
+                        <div className="phil-expansion">
+                          <div className="phil-quote-box">
+                            <span className="material-symbols-outlined phil-quote-icon">format_quote</span>
+                            <p className="phil-quote-text">{p.quote}</p>
+                          </div>
+                          
+                          <div className="phil-context-box">
+                            <span className="phil-context-label">Applied Context</span>
+                            <ul className="phil-context-list">
+                              {p.context.map((ctx, idx) => (
+                                <li key={idx}>{ctx}</li>
+                              ))}
+                            </ul>
+                          </div>
                         </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </motion.div>
+                </div>
               </motion.div>
             );
           })}

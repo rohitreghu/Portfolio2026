@@ -144,7 +144,6 @@ const Expertise = () => {
             return (
               <motion.div 
                 key={item.id} 
-                layout
                 variants={cardVariant} 
                 className={`expertise-card group ${isExpanded ? 'is-expanded' : ''}`}
                 onClick={() => handleCardClick(item.id)}
@@ -159,12 +158,12 @@ const Expertise = () => {
                 </div>
                 
                 {/* Main Content Area */}
-                <motion.div layout="position" className="expertise-content-wrapper">
+                <div className="expertise-content-wrapper">
                   <div className="expertise-content">
-                    <motion.h3 layout="position" className="expertise-title">{item.title}</motion.h3>
-                    <motion.p layout="position" className="expertise-description">
+                    <h3 className="expertise-title">{item.title}</h3>
+                    <p className="expertise-description">
                       {item.description}
-                    </motion.p>
+                    </p>
                     
                     {/* Hover Capabilities Reveal */}
                     <div className="expertise-capabilities">
@@ -184,27 +183,29 @@ const Expertise = () => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="expertise-expansion"
+                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                        style={{ overflow: 'hidden' }}
                       >
-                        <div className="expansion-divider"></div>
-                        <div className="expansion-label">Architectural Focus:</div>
-                        <ul className="expansion-list">
-                          {item.details.map((detail, i) => (
-                            <li key={i}>
-                              <span className="material-symbols-outlined bullet-icon">subdirectory_arrow_right</span>
-                              {detail}
-                            </li>
-                          ))}
-                        </ul>
+                        <div className="expertise-expansion">
+                          <div className="expansion-divider"></div>
+                          <div className="expansion-label">Architectural Focus:</div>
+                          <ul className="expansion-list">
+                            {item.details.map((detail, i) => (
+                              <li key={i}>
+                                <span className="material-symbols-outlined bullet-icon">subdirectory_arrow_right</span>
+                                {detail}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
 
-                  <motion.div layout="position" className="expertise-meta">
+                  <div className="expertise-meta">
                     {item.meta}
-                  </motion.div>
-                </motion.div>
+                  </div>
+                </div>
               </motion.div>
             );
           })}

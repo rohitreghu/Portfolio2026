@@ -104,7 +104,7 @@ const Hero = () => {
             for complex products
           </motion.h1>
           <motion.p variants={fadeUp} className="hero-subheadline">
-            Senior Frontend Architect / Product Engineer
+            Frontend Developer / Product Engineer
           </motion.p>
 
           <motion.div variants={fadeUp} className="hero-ctas">
