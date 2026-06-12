@@ -14,6 +14,36 @@
 
   --border-color: rgba(255, 255, 255, 0.08);
 
+  /* Surface / Glass backgrounds — replaces all hardcoded rgba(30,41,59,…) */
+  --bg-card: rgba(30, 41, 59, 0.4);
+  --bg-card-strong: rgba(30, 41, 59, 0.8);
+  --bg-card-hover: rgba(30, 41, 59, 0.9);
+
+  /* Deep surface backgrounds — replaces rgba(16,19,26,…) and rgba(15,23,42,…) */
+  --bg-surface: rgba(16, 19, 26, 0.6);
+  --bg-surface-strong: rgba(15, 23, 42, 0.9);
+  --bg-tooltip: rgba(15, 23, 42, 0.9);
+
+  /* Nav-specific backgrounds */
+  --bg-nav: rgba(8, 8, 10, 0.7);
+  --bg-nav-mobile: rgba(10, 12, 16, 0.95);
+
+  /* Subtle borders — replaces all rgba(255,255,255,…) borders */
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-medium: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.2);
+
+  /* Inline text overrides for hover states */
+  --text-hover-bright: #ffffff;
+  --text-hover-secondary: rgba(255, 255, 255, 0.9);
+
+  /* Grid/pattern overlay colour */
+  --grid-line-color: rgba(255, 255, 255, 0.015);
+  --grid-line-color-diagram: rgba(255, 255, 255, 0.03);
+
+  /* Bullet/icon accent for expanded list items */
+  --bullet-icon-color: rgba(255, 255, 255, 0.2);
+
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   
@@ -68,8 +98,8 @@ body::before {
   inset: 0;
   background-size: 50px 50px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+    linear-gradient(to right, var(--grid-line-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
   z-index: -1;
   pointer-events: none;
 }
@@ -247,5 +277,163 @@ button {
   
   .impact-card:hover .impact-icon {
     transform: none !important;
+  }
+}
+
+/* ============================================================
+   LIGHT MODE TOKEN OVERRIDES
+   Applied when <html data-theme="light">
+   ============================================================ */
+[data-theme="light"] {
+  /* Backgrounds */
+  --bg-primary: #f5f5f7;
+  --bg-secondary: #eaeaec;
+  --bg-tertiary: #dddde3;
+
+  /* Text */
+  --text-primary: #0a0a0f;
+  --text-secondary: #4a4a57;
+  --text-muted: #7a7a8a;
+
+  /* Accent — keep the same blue, just tune the glow */
+  --accent-glow: rgba(59, 130, 246, 0.08);
+
+  /* Borders */
+  --border-color: rgba(0, 0, 0, 0.08);
+
+  /* Surface / Glass backgrounds */
+  --bg-card: rgba(255, 255, 255, 0.6);
+  --bg-card-strong: rgba(255, 255, 255, 0.85);
+  --bg-card-hover: rgba(255, 255, 255, 0.95);
+
+  /* Deep surfaces */
+  --bg-surface: rgba(240, 240, 245, 0.8);
+  --bg-surface-strong: rgba(235, 235, 242, 0.95);
+  --bg-tooltip: rgba(15, 23, 42, 0.92); /* keep tooltips dark — better contrast */
+
+  /* Nav */
+  --bg-nav: rgba(245, 245, 247, 0.8);
+  --bg-nav-mobile: rgba(240, 240, 244, 0.97);
+
+  /* Subtle borders */
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-medium: rgba(0, 0, 0, 0.1);
+  --border-strong: rgba(0, 0, 0, 0.18);
+
+  /* Inline text hover overrides */
+  --text-hover-bright: #0a0a0f;
+  --text-hover-secondary: rgba(0, 0, 0, 0.85);
+
+  /* Grid lines */
+  --grid-line-color: rgba(0, 0, 0, 0.04);
+  --grid-line-color-diagram: rgba(0, 0, 0, 0.04);
+
+  /* Bullet icons */
+  --bullet-icon-color: rgba(0, 0, 0, 0.2);
+}
+
+/* In light mode, flip the body gradient */
+[data-theme="light"] body {
+  background: radial-gradient(circle at top center, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+}
+
+/* ============================================================
+   THEME RIPPLE WIPE ANIMATION (View Transitions API)
+   ============================================================ */
+
+/* Disable the default cross-fade */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+  display: block;
+}
+
+/* 
+  When switching TO light mode:
+  The new (light) state expands over the old (dark) state. 
+*/
+[data-theme="light"]::view-transition-new(root) {
+  animation: theme-ripple-expand 700ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 9999;
+}
+[data-theme="light"]::view-transition-old(root) {
+  z-index: 1; /* keep old state in background */
+}
+
+/* 
+  When switching TO dark mode (removing the light theme):
+  We want the old (light) state to shrink away to reveal the new (dark) state.
+  Alternatively, you can expand the new dark state just like the light one.
+  Expanding the new state always feels more like "turning a light off/on" from the switch.
+*/
+:root:not([data-theme="light"])::view-transition-new(root) {
+  animation: theme-ripple-expand 700ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  z-index: 9999;
+}
+:root:not([data-theme="light"])::view-transition-old(root) {
+  z-index: 1; 
+}
+
+@keyframes theme-ripple-expand {
+  0% {
+    clip-path: circle(0px at var(--ripple-x, 50%) var(--ripple-y, 50%));
+  }
+  100% {
+    clip-path: circle(150vmax at var(--ripple-x, 50%) var(--ripple-y, 50%));
+  }
+}
+
+/* ============================================================
+   REDUCED MOTION ACCESSIBILITY
+   Applied when the user enables "Reduce motion" in OS settings.
+   Disables or simplifies all decorative animations while
+   preserving full layout, colour, and content.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+
+  /* --- View Transition ripple wipe (theme toggle) --- */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+
+  [data-theme="light"]::view-transition-new(root),
+  :root:not([data-theme="light"])::view-transition-new(root) {
+    animation: none !important;
+    /* Instant cut instead of the expanding circle */
+    clip-path: none !important;
+  }
+
+  /* --- Loader spinners --- */
+  @keyframes spin {
+    100% { transform: none; }
+  }
+
+  /* --- Hero SVG: dashed stroke travel animation --- */
+  .anim-dash {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+
+  /* --- Hero SVG: data packet circles (animateMotion / animate) --- */
+  .data-packets circle {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+
+  /* --- Timeline: animated progress line --- */
+  .timeline-line-base {
+    transition: none !important;
+  }
+
+  /* --- Global: suppress any remaining transitions on interactive elements --- */
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
   }
 }

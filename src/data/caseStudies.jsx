@@ -1,7 +1,61 @@
+/**
+ * Single source of truth for all case study content.
+ *
+ * Previously split across two files:
+ *   - src/components/CaseStudies/CaseStudies.jsx (list-card data)
+ *   - src/data/caseStudies.jsx (detail-page content)
+ *
+ * Each entry contains all fields needed by both consumers:
+ *   - List card:  id, slug, cardTitle, subtitle, problem, solution, impact, ctaText, reverse
+ *   - Detail page: title, overview, problemContext, architecture, challenges, outcomes, keyLearning
+ *
+ * Exports:
+ *   caseStudiesArray — ordered array, consumed by the CaseStudies list component
+ *   caseStudiesMap   — object keyed by slug, consumed by the CaseStudy detail page
+ */
+
 import React from 'react';
 
-export const caseStudiesData = {
-  'microfrontend-platform': {
+export const caseStudiesArray = [
+  // ─── Case Study 1 ────────────────────────────────────────────────────────────
+  {
+    // Shared identity
+    id: 1,
+    slug: 'microfrontend-platform',
+
+    // List-card fields
+    cardTitle: 'Scalable Microfrontend Platform',
+    subtitle: 'Designing independently deployable frontend systems for multi-team product delivery.',
+    problem: (
+      <>
+        <p>The legacy monolith suffered from coupled releases and duplicated code, which severely constrained team autonomy and slowed down product delivery.</p>
+      </>
+    ),
+    solution: (
+      <>
+        <p>Architected a shell-and-federated application system that isolated domains while preserving a shared runtime layer and consistent user experience.</p>
+      </>
+    ),
+    impact: (
+      <div className="impact-grid">
+        <div className="impact-card">
+          <span className="material-symbols-outlined impact-icon">group_work</span>
+          <span>Multi-team delivery enablement</span>
+        </div>
+        <div className="impact-card">
+          <span className="material-symbols-outlined impact-icon">layers</span>
+          <span>Shared platform reuse</span>
+        </div>
+        <div className="impact-card">
+          <span className="material-symbols-outlined impact-icon">rocket_launch</span>
+          <span>Independent deployment model</span>
+        </div>
+      </div>
+    ),
+    ctaText: 'Read Full Architecture Writeup',
+    reverse: false,
+
+    // Detail-page fields
     title: 'Designing a Scalable Microfrontend Platform for Enterprise Products',
     overview: 'As product surfaces grew across multiple teams, frontend delivery began to show classic scaling problems. Release coordination became increasingly coupled. Shared functionality was duplicated across applications. Team autonomy was constrained by centralized deployments. Frontend architecture was becoming harder to evolve sustainably. The challenge was not merely building more UI. It was enabling multiple teams to build independently without losing consistency or architectural integrity.',
     problemContext: (
@@ -11,7 +65,7 @@ export const caseStudiesData = {
         <ul>
           <li><strong>Deployment Coupling:</strong> Changes in one domain often became entangled with releases for others, slowing delivery.</li>
           <li><strong>Shared Code Duplication:</strong> Teams were re-solving common problems (auth concerns, shell behaviors, UI patterns, bootstrapping), leading to inconsistency and maintenance overhead.</li>
-          <li><strong>Blurry Ownership Boundaries:</strong> As domains grew, boundaries in the frontend architecture became increasingly important. Without stronger separation, teams stepped on each other’s changes, scaling engineering became difficult, and code ownership eroded.</li>
+          <li><strong>Blurry Ownership Boundaries:</strong> As domains grew, boundaries in the frontend architecture became increasingly important. Without stronger separation, teams stepped on each other's changes, scaling engineering became difficult, and code ownership eroded.</li>
         </ul>
       </>
     ),
@@ -51,10 +105,47 @@ Shell Application
         <p>And just as importantly, it created a model that could grow with product complexity.</p>
       </>
     ),
-    keyLearning: 'Microfrontends are rarely just a technical pattern. They are often a response to organizational scale. That was perhaps the biggest lesson.'
+    keyLearning: 'Microfrontends are rarely just a technical pattern. They are often a response to organizational scale. That was perhaps the biggest lesson.',
   },
-  
-  'shared-ui-libraries': {
+
+  // ─── Case Study 2 ────────────────────────────────────────────────────────────
+  {
+    id: 2,
+    slug: 'shared-ui-libraries',
+
+    // List-card fields
+    cardTitle: 'Shared Platform Libraries',
+    subtitle: 'Building internal npm packages for consistency, reuse and engineering leverage.',
+    problem: (
+      <>
+        <p>Repeated patterns across UI components, localization, and bootstrapping created duplicated effort and inconsistent user experiences.</p>
+      </>
+    ),
+    solution: (
+      <>
+        <p>Productized internal platform packages designed as a robust, versioned, and reusable foundation across the engineering organization.</p>
+      </>
+    ),
+    impact: (
+      <div className="impact-grid">
+        <div className="impact-card">
+          <span className="material-symbols-outlined impact-icon">speed</span>
+          <span>Faster product development</span>
+        </div>
+        <div className="impact-card">
+          <span className="material-symbols-outlined impact-icon">design_services</span>
+          <span>Stronger UI consistency</span>
+        </div>
+        <div className="impact-card">
+          <span className="material-symbols-outlined impact-icon">settings_applications</span>
+          <span>Shift to platform leverage</span>
+        </div>
+      </div>
+    ),
+    ctaText: 'Read Full Architecture Writeup',
+    reverse: true,
+
+    // Detail-page fields
     title: 'Building Shared UI Platform Libraries as Internal npm Packages',
     overview: 'As applications and teams grew, another problem emerged: Teams were repeatedly solving the same problems. Not only in components, but in platform-level concerns. The opportunity was to move from isolated implementations to reusable shared engineering assets.',
     problemContext: (
@@ -66,7 +157,7 @@ Shell Application
     ),
     architecture: (
       <>
-        <p>We contributed to building internal npm libraries intended to function as shared platform building blocks. Rather than treating libraries as “component dumps,” we approached them as productized internal platforms.</p>
+        <p>We contributed to building internal npm libraries intended to function as shared platform building blocks. Rather than treating libraries as "component dumps," we approached them as productized internal platforms.</p>
         <p><strong>Shared Library Categories:</strong></p>
         <ul>
           <li><strong>Component Libraries:</strong> Reusable UI primitives and product components (form controls, workflow primitives, layout systems). Focus was consistency and reuse.</li>
@@ -77,7 +168,7 @@ Shell Application
     ),
     challenges: (
       <>
-        <p>Shared libraries sound simple. They aren’t.</p>
+        <p>Shared libraries sound simple. They aren't.</p>
         <ul>
           <li><strong>Over-Abstraction Risk:</strong> Abstracting too early is a danger. Shared libraries can become generic in the wrong ways. We had to think carefully about what belongs in shared platform layers vs. what should remain product-specific.</li>
           <li><strong>Versioning and Adoption:</strong> Internal package evolution creates its own problems. How do you ship improvements, avoid breaking consumers, and encourage adoption without forcing upgrades? Versioning strategy mattered.</li>
@@ -97,12 +188,49 @@ Shell Application
         <p>But perhaps more importantly, they shifted thinking from feature delivery into platform leverage.</p>
       </>
     ),
-    keyLearning: 'Reusable libraries are not really about reuse. They are about engineering leverage. That mindset changes how you build them.'
+    keyLearning: 'Reusable libraries are not really about reuse. They are about engineering leverage. That mindset changes how you build them.',
   },
 
-  'bff-orchestration': {
+  // ─── Case Study 3 ────────────────────────────────────────────────────────────
+  {
+    id: 3,
+    slug: 'bff-orchestration',
+
+    // List-card fields
+    cardTitle: 'Backend-for-Frontend Orchestration',
+    subtitle: 'Using BFF architecture to simplify UI complexity and improve boundaries.',
+    problem: (
+      <>
+        <p>Frontend applications absorbed too much orchestration logic (transformation, aggregation, validation), drastically increasing maintainability risk.</p>
+      </>
+    ),
+    solution: (
+      <>
+        <p>Introduced a dedicated Node.js/Express BFF layer to aggregate downstream APIs and provide clean, UI-oriented contracts.</p>
+      </>
+    ),
+    impact: (
+      <div className="impact-grid">
+        <div className="impact-card">
+          <span className="material-symbols-outlined impact-icon">code_blocks</span>
+          <span>Simplified UI logic</span>
+        </div>
+        <div className="impact-card">
+          <span className="material-symbols-outlined impact-icon">mediation</span>
+          <span>Better separation of concerns</span>
+        </div>
+        <div className="impact-card">
+          <span className="material-symbols-outlined impact-icon">api</span>
+          <span>UI-optimized API contracts</span>
+        </div>
+      </div>
+    ),
+    ctaText: 'Read Full Architecture Writeup',
+    reverse: false,
+
+    // Detail-page fields
     title: 'Using Backend-for-Frontend to Simplify UI Complexity',
-    overview: 'As product workflows grew more complex, frontend applications were beginning to absorb orchestration logic that didn’t really belong in the UI. Transformation logic. Aggregation. Validation. Contract adaptation. The frontend was doing too much. That often signals an architectural problem.',
+    overview: 'As product workflows grew more complex, frontend applications were beginning to absorb orchestration logic that didn\'t really belong in the UI. Transformation logic. Aggregation. Validation. Contract adaptation. The frontend was doing too much. That often signals an architectural problem.',
     problemContext: (
       <>
         <p>The UI frequently had to interact with multiple downstream services, often needing response shaping, data aggregation, validation layers, and UI-oriented orchestration.</p>
@@ -149,6 +277,14 @@ Multiple Downstream APIs
         <p>It improved both developer experience and product maintainability.</p>
       </>
     ),
-    keyLearning: 'Some frontend problems are actually interface-boundary problems. And sometimes the best frontend optimization happens outside the frontend.'
-  }
-};
+    keyLearning: 'Some frontend problems are actually interface-boundary problems. And sometimes the best frontend optimization happens outside the frontend.',
+  },
+];
+
+/**
+ * O(1) slug-keyed lookup — consumed by the CaseStudy detail page.
+ * Derived from caseStudiesArray so the two are always in sync.
+ */
+export const caseStudiesMap = Object.fromEntries(
+  caseStudiesArray.map((cs) => [cs.slug, cs])
+);

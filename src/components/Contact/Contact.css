@@ -53,10 +53,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(30, 41, 59, 0.3);
+  background: var(--bg-card);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
   border-radius: 1rem;
   padding: var(--space-8) var(--space-6);
   min-width: 240px;
@@ -66,7 +66,7 @@
 
 .contact-card:hover {
   transform: translateY(-4px);
-  background: rgba(30, 41, 59, 0.6);
+  background: var(--bg-card);
   border-color: rgba(173, 198, 255, 0.2);
 }
 

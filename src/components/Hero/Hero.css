@@ -89,15 +89,15 @@
 }
 
 .btn-secondary {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--border-subtle);
   color: var(--text-primary);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-medium);
   backdrop-filter: blur(8px);
 }
 
 .btn-secondary:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+  background-color: var(--border-medium);
+  border-color: var(--border-strong);
   transform: translateY(-2px);
 }
 
@@ -155,10 +155,10 @@
   position: relative;
   width: 100%;
   height: clamp(300px, 80vw, 500px);
-  background: rgba(30, 41, 59, 0.4);
+  background: var(--bg-card);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
   border-radius: 1rem;
   overflow: visible;
   display: flex;
@@ -201,7 +201,7 @@
 
 .arch-line-static {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.05);
+  stroke: var(--border-subtle);
   stroke-width: 0.2;
 }
 
@@ -263,7 +263,7 @@
   width: 6rem;
   height: 6rem;
   border-radius: 1rem;
-  background: rgba(30, 41, 59, 0.8);
+  background: var(--bg-card-strong);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(173, 198, 255, 0.4);
@@ -303,7 +303,7 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  background: rgba(30, 41, 59, 0.9);
+  background: var(--bg-card-hover);
   padding: 0.375rem 0.75rem;
   border-radius: 0.375rem;
   border: 1px solid rgba(173, 198, 255, 0.2);
@@ -314,7 +314,7 @@
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 0.75rem;
-  background: rgba(30, 41, 59, 0.6);
+  background: var(--bg-card);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(208, 188, 255, 0.3);
@@ -338,7 +338,7 @@
   font-size: 0.625rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  background: rgba(16, 19, 26, 0.5);
+  background: var(--bg-surface);
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
   opacity: 0.9;
@@ -394,7 +394,7 @@
 
 .clickable-node:hover .node-interactive-bg {
   transform: scale(1.1);
-  background: rgba(30, 41, 59, 0.9);
+  background: var(--bg-card-hover);
   box-shadow: 0 0 20px rgba(59, 130, 246, 0.4), inset 0 0 10px rgba(173, 198, 255, 0.2);
 }
 
@@ -413,9 +413,9 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%) scale(0.95);
-  background: rgba(15, 23, 42, 0.9);
+  background: var(--bg-tooltip);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-medium);
   padding: var(--space-3) var(--space-4);
   border-radius: 0.5rem;
   opacity: 0;

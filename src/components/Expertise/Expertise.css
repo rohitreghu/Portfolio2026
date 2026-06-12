@@ -37,10 +37,10 @@
 /* Premium Product Card (Bento Style) */
 .expertise-card {
   position: relative;
-  background: rgba(30, 41, 59, 0.4);
+  background: var(--bg-card);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
   border-radius: 1.5rem; /* Larger border radius for premium feel */
   padding: calc(var(--space-6) + 4rem) var(--space-8) var(--space-8);
   min-height: 320px; /* Force large card height */
@@ -101,19 +101,19 @@
   width: 3rem;
   height: 3rem;
   border-radius: 0.75rem;
-  background: rgba(30, 41, 59, 0.6);
+  background: var(--bg-card);
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-medium);
   z-index: 2;
   transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
 }
 
 .expertise-card:hover .expertise-icon-wrapper {
   transform: scale(1.05);
-  background: rgba(30, 41, 59, 0.9);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: var(--bg-card-hover);
+  border-color: var(--border-strong);
 }
 
 .expertise-icon {
@@ -199,10 +199,10 @@
 .capabilities-list li {
   font-size: 0.85rem;
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--border-subtle);
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
 }
 
 /* Click Expansion Details */
@@ -212,7 +212,7 @@
 
 .expansion-divider {
   height: 1px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+  background: linear-gradient(90deg, var(--border-medium), transparent);
   margin: var(--space-4) 0;
 }
 
@@ -245,7 +245,7 @@
 
 .bullet-icon {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.2);
+  color: var(--bullet-icon-color);
   margin-top: 2px;
 }
 
@@ -253,7 +253,7 @@
 .expertise-meta {
   margin-top: var(--space-6);
   padding-top: var(--space-4);
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--border-subtle);
   font-family: 'Space Grotesk', monospace;
   font-size: 0.75rem;
   color: var(--text-muted);
@@ -273,7 +273,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  color: rgba(255, 255, 255, 0.03);
+  color: var(--grid-line-color-diagram);
   pointer-events: none;
   z-index: 0;
   transition: color 0.5s ease;

@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTheme } from '../../context/ThemeContext';
 import './Navbar.css';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { theme, triggerToggle } = useTheme();
 
   // Close menu on scroll or click outside
   useEffect(() => {
@@ -17,25 +19,45 @@ const Navbar = () => {
       <div className="navbar-container">
         <a href="#hero" className="logo" onClick={() => setIsOpen(false)}>Rohit Reghu</a>
         
-        <button 
-          className="mobile-menu-btn" 
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
-        >
-          <span className="material-symbols-outlined">
-            {isOpen ? 'close' : 'menu'}
-          </span>
-        </button>
+        <div className="nav-actions">
+          <nav className="nav-desktop">
+            <ul className="nav-links">
+              <li><a href="#timeline">Timeline</a></li>
+              <li><a href="#expertise">Expertise</a></li>
+              <li><a href="#case-studies">Work</a></li>
+              <li><a href="#philosophy">Philosophy</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </nav>
 
-        <nav className="nav-desktop">
-          <ul className="nav-links">
-            <li><a href="#timeline">Timeline</a></li>
-            <li><a href="#expertise">Expertise</a></li>
-            <li><a href="#case-studies">Work</a></li>
-            <li><a href="#philosophy">Philosophy</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </nav>
+          {/* Theme Toggle Button */}
+          <button
+            className="theme-toggle-btn"
+            onClick={(e) => {
+              const rect = e.currentTarget.getBoundingClientRect();
+              triggerToggle(
+                rect.left + rect.width / 2,
+                rect.top + rect.height / 2
+              );
+            }}
+            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+            title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            <span className="material-symbols-outlined">
+              {theme === 'dark' ? 'light_mode' : 'dark_mode'}
+            </span>
+          </button>
+
+          <button 
+            className="mobile-menu-btn" 
+            onClick={() => setIsOpen(!isOpen)}
+            aria-label="Toggle menu"
+          >
+            <span className="material-symbols-outlined">
+              {isOpen ? 'close' : 'menu'}
+            </span>
+          </button>
+        </div>
 
         <AnimatePresence>
           {isOpen && (

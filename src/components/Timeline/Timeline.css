@@ -86,10 +86,10 @@
 /* Milestone Card */
 .milestone-card {
   position: relative;
-  background: rgba(30, 41, 59, 0.4);
+  background: var(--bg-card);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
   border-radius: 1rem;
   padding: var(--space-6);
   transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
@@ -104,7 +104,7 @@
 .milestone-texture {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-image: radial-gradient(var(--border-medium) 1px, transparent 1px);
   background-size: 12px 12px;
   opacity: 0;
   transition: opacity 0.5s ease;
@@ -126,7 +126,7 @@
 .milestone-card.is-hovered,
 .milestone-card:hover {
   transform: translateY(-4px) scale(1.02);
-  background: rgba(15, 23, 42, 0.7);
+  background: var(--bg-surface-strong);
   border-color: rgba(173, 198, 255, 0.2);
   box-shadow: 0 12px 40px -10px rgba(173, 198, 255, 0.15), inset 0 0 40px rgba(59, 130, 246, 0.05);
 }
@@ -229,7 +229,7 @@
 .milestone-card.highlight:hover {
   border-color: rgba(59, 130, 246, 0.6);
   box-shadow: 0 12px 40px -10px rgba(59, 130, 246, 0.3), inset 0 0 40px rgba(59, 130, 246, 0.1);
-  background: rgba(15, 23, 42, 0.8);
+  background: var(--bg-surface-strong);
 }
 
 .milestone-card.highlight .milestone-title {
@@ -285,17 +285,17 @@
   font-size: 0.65rem;
   font-family: 'Space Grotesk', monospace;
   color: var(--text-muted);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--border-subtle);
   padding: 0.2rem 0.5rem;
   border-radius: 0.25rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
   transition: all 0.4s ease;
 }
 
 .milestone-card.is-hovered .chip {
   border-color: rgba(173, 198, 255, 0.2);
   color: var(--text-secondary);
-  background: rgba(255, 255, 255, 0.08);
+  background: var(--border-medium);
 }
 
 /* Basic class hook for scroll reveal logic later */

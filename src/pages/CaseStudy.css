@@ -10,7 +10,7 @@
   top: 0;
   width: 100%;
   height: var(--nav-height);
-  background: rgba(8, 8, 10, 0.8);
+  background: var(--bg-nav);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--border-color);
@@ -79,7 +79,7 @@
   color: var(--text-primary);
   margin-bottom: var(--space-6);
   padding-bottom: var(--space-2);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 /* Custom styling inside the editorial content for case studies */
@@ -96,8 +96,8 @@
 }
 
 .arch-code-block {
-  background: rgba(16, 19, 26, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
   padding: var(--space-6);
   border-radius: 0.75rem;
   margin: var(--space-8) 0;

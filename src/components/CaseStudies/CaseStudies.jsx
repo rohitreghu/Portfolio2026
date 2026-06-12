@@ -2,125 +2,12 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Section from '../Section';
+import { caseStudiesArray } from '../../data/caseStudies';
+import { makeStagger, makeFadeUp, motionProp } from '../../utils/animations';
 import './CaseStudies.css';
 
-const caseStudiesData = [
-  {
-    id: 1,
-    slug: 'microfrontend-platform',
-    title: 'Scalable Microfrontend Platform',
-    subtitle: 'Designing independently deployable frontend systems for multi-team product delivery.',
-    problem: (
-      <>
-        <p>The legacy monolith suffered from coupled releases and duplicated code, which severely constrained team autonomy and slowed down product delivery.</p>
-      </>
-    ),
-    solution: (
-      <>
-        <p>Architected a shell-and-federated application system that isolated domains while preserving a shared runtime layer and consistent user experience.</p>
-      </>
-    ),
-    impact: (
-      <div className="impact-grid">
-        <div className="impact-card">
-          <span className="material-symbols-outlined impact-icon">group_work</span>
-          <span>Multi-team delivery enablement</span>
-        </div>
-        <div className="impact-card">
-          <span className="material-symbols-outlined impact-icon">layers</span>
-          <span>Shared platform reuse</span>
-        </div>
-        <div className="impact-card">
-          <span className="material-symbols-outlined impact-icon">rocket_launch</span>
-          <span>Independent deployment model</span>
-        </div>
-      </div>
-    ),
-    ctaText: 'Read Full Architecture Writeup',
-    reverse: false
-  },
-  {
-    id: 2,
-    slug: 'shared-ui-libraries',
-    title: 'Shared Platform Libraries',
-    subtitle: 'Building internal npm packages for consistency, reuse and engineering leverage.',
-    problem: (
-      <>
-        <p>Repeated patterns across UI components, localization, and bootstrapping created duplicated effort and inconsistent user experiences.</p>
-      </>
-    ),
-    solution: (
-      <>
-        <p>Productized internal platform packages designed as a robust, versioned, and reusable foundation across the engineering organization.</p>
-      </>
-    ),
-    impact: (
-      <div className="impact-grid">
-        <div className="impact-card">
-          <span className="material-symbols-outlined impact-icon">speed</span>
-          <span>Faster product development</span>
-        </div>
-        <div className="impact-card">
-          <span className="material-symbols-outlined impact-icon">design_services</span>
-          <span>Stronger UI consistency</span>
-        </div>
-        <div className="impact-card">
-          <span className="material-symbols-outlined impact-icon">settings_applications</span>
-          <span>Shift to platform leverage</span>
-        </div>
-      </div>
-    ),
-    ctaText: 'Read Full Architecture Writeup',
-    reverse: true
-  },
-  {
-    id: 3,
-    slug: 'bff-orchestration',
-    title: 'Backend-for-Frontend Orchestration',
-    subtitle: 'Using BFF architecture to simplify UI complexity and improve boundaries.',
-    problem: (
-      <>
-        <p>Frontend applications absorbed too much orchestration logic (transformation, aggregation, validation), drastically increasing maintainability risk.</p>
-      </>
-    ),
-    solution: (
-      <>
-        <p>Introduced a dedicated Node.js/Express BFF layer to aggregate downstream APIs and provide clean, UI-oriented contracts.</p>
-      </>
-    ),
-    impact: (
-      <div className="impact-grid">
-        <div className="impact-card">
-          <span className="material-symbols-outlined impact-icon">code_blocks</span>
-          <span>Simplified UI logic</span>
-        </div>
-        <div className="impact-card">
-          <span className="material-symbols-outlined impact-icon">mediation</span>
-          <span>Better separation of concerns</span>
-        </div>
-        <div className="impact-card">
-          <span className="material-symbols-outlined impact-icon">api</span>
-          <span>UI-optimized API contracts</span>
-        </div>
-      </div>
-    ),
-    ctaText: 'Read Full Architecture Writeup',
-    reverse: false
-  }
-];
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2 }
-  }
-};
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }
-};
+const staggerContainer = makeStagger(0.2);
+const fadeUp = makeFadeUp(40, 0.8);
 
 const CaseStudies = () => {
   return (
@@ -138,7 +25,7 @@ const CaseStudies = () => {
         </motion.div>
 
         <div className="cs-list">
-          {caseStudiesData.map((cs) => (
+          {caseStudiesArray.map((cs) => (
             <motion.div 
               key={cs.id} 
               id={`cs-${cs.slug}`}
@@ -218,7 +105,7 @@ const CaseStudies = () => {
 
               <div className="cs-content">
                 <div className="cs-meta">Case Study 0{cs.id}</div>
-                <h3 className="cs-title">{cs.title}</h3>
+                <h3 className="cs-title">{cs.cardTitle}</h3>
                 <p className="cs-subtitle">{cs.subtitle}</p>
                 
                 <div className="cs-details">
@@ -245,8 +132,8 @@ const CaseStudies = () => {
                 </div>
 
                 <motion.div
-                  whileHover={{ scale: 1.02, x: 5 }}
-                  whileTap={{ scale: 0.98 }}
+                  whileHover={motionProp({ scale: 1.02, x: 5 })}
+                  whileTap={motionProp({ scale: 0.98 })}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   style={{ display: 'inline-block' }}
                 >

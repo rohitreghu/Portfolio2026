@@ -2,23 +2,12 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import Section from '../Section';
+import { makeStagger, makeFadeUp, motionProp } from '../../utils/animations';
 import './Hero.css';
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2
-    }
-  }
-};
+// Hero-specific variants: smaller y offset, stagger with delayChildren
+const staggerContainer = makeStagger(0.15, 0.2);
+const fadeUp = makeFadeUp(20, 0.6);
 
 const archNodes = [
   {
@@ -111,8 +100,8 @@ const Hero = () => {
             <motion.a
               href="#case-studies"
               className="btn btn-primary"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={motionProp({ scale: 1.02 })}
+              whileTap={motionProp({ scale: 0.98 })}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               View Case Studies
@@ -120,8 +109,8 @@ const Hero = () => {
             <motion.a
               href="#contact"
               className="btn btn-secondary"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={motionProp({ scale: 1.02 })}
+              whileTap={motionProp({ scale: 0.98 })}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               Contact Me

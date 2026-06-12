@@ -1,27 +1,22 @@
 import React from 'react';
 import { useParams, Link, Navigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { caseStudiesData } from '../data/caseStudies';
+import { caseStudiesMap } from '../data/caseStudies';
+import { makeStagger, makeFadeUp } from '../utils/animations';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import './CaseStudy.css';
 import Footer from '../components/Footer/Footer';
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } }
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 }
-  }
-};
+const fadeUp = makeFadeUp(30, 0.6);
+const staggerContainer = makeStagger(0.15);
 
 const CaseStudy = () => {
   const { slug } = useParams();
   const location = useLocation();
-  const data = caseStudiesData[slug];
+  const data = caseStudiesMap[slug];
+
+  // Set page-specific document title; falls back gracefully if slug not found
+  useDocumentTitle(data ? `${data.cardTitle} | Rohit Reghu` : 'Rohit Reghu');
 
   if (!data) {
     return <Navigate to="/" replace />;
@@ -69,7 +64,7 @@ const CaseStudy = () => {
             </section>
 
             <section className="cs-section">
-              <h2>Engineering Challenges & Tradeoffs</h2>
+              <h2>Engineering Challenges &amp; Tradeoffs</h2>
               {data.challenges}
             </section>
 
